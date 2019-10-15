@@ -1,0 +1,6 @@
+/target/
+/web_page/
+/web_widgets/
+
+.settings
+.project

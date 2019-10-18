@@ -12,7 +12,8 @@
 
 	<properties>
 		<web.pages.dir>web_page</web.pages.dir>
-		<living-app-page-id>LayoutBonitaV3</living-app-page-id>
+		<living-app-layout-id>LayoutBonitaV3</living-app-layout-id>
+		<user-app-caselist-id>caselistBonitaV1</user-app-caselist-id>
 		<web.widgets.dir>web_widgets</web.widgets.dir>
 	</properties>
 
@@ -44,6 +45,27 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>get-bonita-user-caselist-page</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.bonitasoft.web.pages</groupId>
+									<artifactId>page-user-case-list</artifactId>
+									<version>${project.version}</version>
+									<type>zip</type>
+								</artifactItem>
+							</artifactItems>
+							<includes>resources/page.json,resources/assets/**</includes>
+							<outputDirectory>${web.pages.dir}/${user-app-caselist-id}</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+					<execution>
 						<id>get-bonita-layout-page</id>
 						<phase>generate-sources</phase>
 						<goals>
@@ -59,7 +81,7 @@
 								</artifactItem>
 							</artifactItems>
 							<includes>resources/page.json,resources/assets/**</includes>
-							<outputDirectory>${web.pages.dir}/${living-app-page-id}</outputDirectory>
+							<outputDirectory>${web.pages.dir}/${living-app-layout-id}</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
@@ -123,13 +145,28 @@
 						</goals>
 					</execution>
 					<execution>
+						<id>move-user-caselist-page-resources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target>
+								<move todir="${web.pages.dir}/${user-app-caselist-id}"
+									failonerror="true">
+									<fileset dir="${web.pages.dir}/${user-app-caselist-id}/resources" />
+								</move>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
 						<id>move-layout-page-resources</id>
 						<phase>generate-sources</phase>
 						<configuration>
 							<target>
-								<move todir="${web.pages.dir}/${living-app-page-id}"
+								<move todir="${web.pages.dir}/${living-app-layout-id}"
 									failonerror="true">
-									<fileset dir="${web.pages.dir}/${living-app-page-id}/resources" />
+									<fileset dir="${web.pages.dir}/${living-app-layout-id}/resources" />
 								</move>
 							</target>
 						</configuration>
@@ -161,11 +198,23 @@
 				<artifactId>copy-rename-maven-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>rename-user-caselist-page-json-file</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceFile>${web.pages.dir}/${user-app-caselist-id}/page.json</sourceFile>
+							<destinationFile>${web.pages.dir}/${user-app-caselist-id}/${user-app-caselist-id}.json</destinationFile>
+							<overWrite>true</overWrite>
+						</configuration>
+						<goals>
+							<goal>rename</goal>
+						</goals>
+					</execution>
+					<execution>
 						<id>rename-layout-page-json-file</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<sourceFile>${web.pages.dir}/${living-app-page-id}/page.json</sourceFile>
-							<destinationFile>${web.pages.dir}/${living-app-page-id}/${living-app-page-id}.json</destinationFile>
+							<sourceFile>${web.pages.dir}/${living-app-layout-id}/page.json</sourceFile>
+							<destinationFile>${web.pages.dir}/${living-app-layout-id}/${living-app-layout-id}.json</destinationFile>
 							<overWrite>true</overWrite>
 						</configuration>
 						<goals>

@@ -7,8 +7,6 @@
 #
 # This script accepts the following parameters:
 #
-# * owner
-# * repo
 # * tag
 # * filename
 # * github_api_token

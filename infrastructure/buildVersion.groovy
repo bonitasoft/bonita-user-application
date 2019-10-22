@@ -10,7 +10,6 @@ pipeline {
                 withCredentials([string(credentialsId: 'github-api', variable: 'GITHUB_API_TOKEN')]) {
                     sh "./infrastructure/upload-github-release-asset.sh github_api_token=$GITHUB_API_TOKEN tag=${params.version} filename=./target/bonita-user-application-${params.version}.bos" 
                 }
-               
             }
         }
     }

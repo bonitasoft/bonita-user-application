@@ -3,8 +3,9 @@
     <application token="userApp" version="1.0" profile="User" homePage="taskList" state="ACTIVATED" layout="custompage_BonitaLayoutV4" theme="custompage_themeBonita">
         <displayName>Bonita User Application</displayName>
         <applicationPages>
+            <applicationPage customPage="custompage_UserCaseDetailsBonitaV1" token="caseDetails"/>
             <applicationPage customPage="custompage_tasklist" token="taskList"/>
-            <applicationPage customPage="custompage_caselistBonitaV1" token="caseList"/>
+            <applicationPage customPage="custompage_UserCaseListBonitaV1" token="caseList"/>
             <applicationPage customPage="custompage_processlistBonita" token="processList"/>
         </applicationPages>
         <applicationMenus>

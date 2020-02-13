@@ -5,7 +5,7 @@
         <applicationPages>
             <applicationPage customPage="custompage_UserCaseDetailsBonitaV1" token="caseDetails"/>
             <applicationPage customPage="custompage_tasklist" token="taskList"/>
-            <applicationPage customPage="custompage_UserCaseListBonitaV1" token="caseList"/>
+            <applicationPage customPage="custompage_UserCaseListBonitaV2" token="caseList"/>
             <applicationPage customPage="custompage_processlistBonita" token="processList"/>
         </applicationPages>
         <applicationMenus>

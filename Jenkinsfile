@@ -11,7 +11,7 @@ timestamps {
             stage('Build') {
                 try {
                     def currentBranch = env.BRANCH_NAME
-                    def isBaseBranch = currentBranch == 'master' || currentBranch == 'dev'
+                    def isBaseBranch = currentBranch == 'master' || currentBranch == 'dev' || currentBranch?.startsWith('release-')
                     if(!isBaseBranch){
                        sh "./mvnw -B clean verify -Djvm=${env.JAVA_HOME_11}/bin/java"
                     }else{

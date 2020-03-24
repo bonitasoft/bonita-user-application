@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <applications xmlns="http://documentation.bonitasoft.com/application-xml-schema/1.0">
-    <application token="userApp" version="1.0" profile="User" homePage="taskList" state="ACTIVATED" layout="custompage_BonitaLayoutV5" theme="custompage_themeBonita">
+    <application token="userApp" version="1.0" profile="User" homePage="task-list" state="ACTIVATED" layout="custompage_BonitaLayoutV5" theme="custompage_themeBonita">
         <displayName>Bonita User Application</displayName>
         <applicationPages>
             <applicationPage customPage="custompage_UserCaseDetailsBonitaV1" token="case-details"/>
-            <applicationPage customPage="custompage_tasklist" token="taskList"/>
-            <applicationPage customPage="custompage_UserCaseListBonitaV2" token="caseList"/>
-            <applicationPage customPage="custompage_processlistBonita" token="processList"/>
+            <applicationPage customPage="custompage_tasklist" token="task-list"/>
+            <applicationPage customPage="custompage_UserCaseListBonitaV2" token="case-list"/>
+            <applicationPage customPage="custompage_processlistBonita" token="process-list"/>
         </applicationPages>
         <applicationMenus>
-            <applicationMenu applicationPage="taskList">
+            <applicationMenu applicationPage="task-list">
                 <displayName>Tasks</displayName>
             </applicationMenu>
-            <applicationMenu applicationPage="caseList">
+            <applicationMenu applicationPage="case-list">
                 <displayName>Cases</displayName>
             </applicationMenu>
-            <applicationMenu applicationPage="processList">
+            <applicationMenu applicationPage="process-list">
                 <displayName>Processes</displayName>
             </applicationMenu>
         </applicationMenus>

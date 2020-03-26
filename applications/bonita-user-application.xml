@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <applications xmlns="http://documentation.bonitasoft.com/application-xml-schema/1.0">
-    <application token="userApp" version="1.0" profile="User" homePage="task-list" state="ACTIVATED" layout="custompage_BonitaLayoutV5" theme="custompage_themeBonita">
+    <application token="userApp" version="2.0" profile="User" homePage="task-list" state="ACTIVATED" layout="custompage_BonitaLayoutV5" theme="custompage_themeBonita">
         <displayName>Bonita User Application</displayName>
         <applicationPages>
             <applicationPage customPage="custompage_UserCaseDetailsBonitaV1" token="case-details"/>

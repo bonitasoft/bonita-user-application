@@ -12,8 +12,9 @@
 
 	<properties>
 		<web.pages.dir>web_page</web.pages.dir>
-		<living-app-layout-id>LayoutBonitaV4</living-app-layout-id>
-		<user-app-caselist-id>caselistBonitaV1</user-app-caselist-id>
+		<living-app-layout-id>LayoutBonitaV5</living-app-layout-id>
+		<user-app-caselist-id>UserCaseListBonitaV2</user-app-caselist-id>
+		<user-app-casedetails-id>UserCaseDetailsBonitaV1</user-app-casedetails-id>
 		<web.widgets.dir>web_widgets</web.widgets.dir>
 	</properties>
 
@@ -61,6 +62,27 @@
 							</artifactItems>
 							<includes>resources/page.json,resources/assets/**</includes>
 							<outputDirectory>${web.pages.dir}/${user-app-caselist-id}</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+					<execution>
+						<id>get-bonita-user-casedetails-page</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.bonitasoft.web.pages</groupId>
+									<artifactId>page-user-case-details</artifactId>
+									<version>${project.version}</version>
+									<type>zip</type>
+								</artifactItem>
+							</artifactItems>
+							<includes>resources/page.json,resources/assets/**</includes>
+							<outputDirectory>${web.pages.dir}/${user-app-casedetails-id}</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
@@ -160,6 +182,21 @@
 						</goals>
 					</execution>
 					<execution>
+						<id>move-user-casedetails-page-resources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<target>
+								<move todir="${web.pages.dir}/${user-app-casedetails-id}"
+									  failonerror="true">
+									<fileset dir="${web.pages.dir}/${user-app-casedetails-id}/resources" />
+								</move>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
 						<id>move-layout-page-resources</id>
 						<phase>generate-sources</phase>
 						<configuration>
@@ -203,6 +240,18 @@
 						<configuration>
 							<sourceFile>${web.pages.dir}/${user-app-caselist-id}/page.json</sourceFile>
 							<destinationFile>${web.pages.dir}/${user-app-caselist-id}/${user-app-caselist-id}.json</destinationFile>
+							<overWrite>true</overWrite>
+						</configuration>
+						<goals>
+							<goal>rename</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>rename-user-casedetails-page-json-file</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceFile>${web.pages.dir}/${user-app-casedetails-id}/page.json</sourceFile>
+							<destinationFile>${web.pages.dir}/${user-app-casedetails-id}/${user-app-casedetails-id}.json</destinationFile>
 							<overWrite>true</overWrite>
 						</configuration>
 						<goals>

@@ -12,7 +12,7 @@
 
 	<properties>
 		<web.pages.dir>web_page</web.pages.dir>
-		<living-app-layout-id>LayoutBonitaV6</living-app-layout-id>
+		<living-app-layout-id>LayoutBonitaV7</living-app-layout-id>
 		<user-app-caselist-id>UserCaseListBonitaV3</user-app-caselist-id>
 		<user-app-casedetails-id>UserCaseDetailsBonitaV1</user-app-casedetails-id>
 		<web.widgets.dir>web_widgets</web.widgets.dir>

@@ -15,6 +15,9 @@
 		<living-app-layout-id>LayoutBonitaV7</living-app-layout-id>
 		<user-app-caselist-id>UserCaseListBonitaV4</user-app-caselist-id>
 		<user-app-casedetails-id>UserCaseDetailsBonitaV1</user-app-casedetails-id>
+		<user-app-error-403-id>Error403</user-app-error-403-id>
+		<user-app-error-404-id>Error404</user-app-error-404-id>
+		<user-app-error-500-id>Error500</user-app-error-500-id>
 		<web.widgets.dir>web_widgets</web.widgets.dir>
 	</properties>
 
@@ -129,6 +132,69 @@
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
 					</execution>
+                    <execution>
+                        <id>get-bonita-user-error-403-page</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.bonitasoft.web.pages</groupId>
+                                    <artifactId>page-error-403</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <includes>resources/page.json,resources/assets/**</includes>
+                            <outputDirectory>${web.pages.dir}/${user-app-error-403-id}</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>get-bonita-user-error-404-page</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.bonitasoft.web.pages</groupId>
+                                    <artifactId>page-error-404</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <includes>resources/page.json,resources/assets/**</includes>
+                            <outputDirectory>${web.pages.dir}/${user-app-error-404-id}</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>get-bonita-user-error-500-page</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.bonitasoft.web.pages</groupId>
+                                    <artifactId>page-error-500</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <includes>resources/page.json,resources/assets/**</includes>
+                            <outputDirectory>${web.pages.dir}/${user-app-error-500-id}</outputDirectory>
+                            <overWriteReleases>true</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -228,6 +294,51 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
+                    <execution>
+                        <id>move-user-error-403-page-resources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target>
+                                <move todir="${web.pages.dir}/${user-app-error-403-id}"
+                                      failonerror="true">
+                                    <fileset dir="${web.pages.dir}/${user-app-error-403-id}/resources" />
+                                </move>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>move-user-error-404-page-resources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target>
+                                <move todir="${web.pages.dir}/${user-app-error-404-id}"
+                                      failonerror="true">
+                                    <fileset dir="${web.pages.dir}/${user-app-error-404-id}/resources" />
+                                </move>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>move-user-error-500-page-resources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target>
+                                <move todir="${web.pages.dir}/${user-app-error-500-id}"
+                                      failonerror="true">
+                                    <fileset dir="${web.pages.dir}/${user-app-error-500-id}/resources" />
+                                </move>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -282,6 +393,42 @@
 							<goal>rename</goal>
 						</goals>
 					</execution>
+                    <execution>
+                        <id>rename-user-error-403-page-json-file</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceFile>${web.pages.dir}/${user-app-error-403-id}/page.json</sourceFile>
+                            <destinationFile>${web.pages.dir}/${user-app-error-403-id}/${user-app-error-403-id}.json</destinationFile>
+                            <overWrite>true</overWrite>
+                        </configuration>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>rename-user-error-404-page-json-file</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceFile>${web.pages.dir}/${user-app-error-404-id}/page.json</sourceFile>
+                            <destinationFile>${web.pages.dir}/${user-app-error-404-id}/${user-app-error-404-id}.json</destinationFile>
+                            <overWrite>true</overWrite>
+                        </configuration>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>rename-user-error-500-page-json-file</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceFile>${web.pages.dir}/${user-app-error-500-id}/page.json</sourceFile>
+                            <destinationFile>${web.pages.dir}/${user-app-error-500-id}/${user-app-error-500-id}.json</destinationFile>
+                            <overWrite>true</overWrite>
+                        </configuration>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                    </execution>
 				</executions>
 			</plugin>
 			<plugin>

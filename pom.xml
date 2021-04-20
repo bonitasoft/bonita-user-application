@@ -18,6 +18,27 @@
 		<web.widgets.dir>web_widgets</web.widgets.dir>
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.bonitasoft.web.pages</groupId>
+			<artifactId>page-user-case-list</artifactId>
+			<version>${project.version}</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.bonitasoft.web.pages</groupId>
+			<artifactId>page-user-case-details</artifactId>
+			<version>${project.version}</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.bonitasoft.web.pages</groupId>
+			<artifactId>layout-bonita</artifactId>
+			<version>${project.version}</version>
+			<type>zip</type>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -282,6 +303,18 @@
 							<goal>rename</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>prepare-xml-artifact</id>
+						<phase>package</phase>
+						<configuration>
+							<sourceFile>applications/${project.artifactId}.xml</sourceFile>
+							<destinationFile>${project.build.directory}/${project.artifactId}-${project.version}.xml</destinationFile>
+							<overWrite>true</overWrite>
+						</configuration>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -298,6 +331,10 @@
 								<artifact>
 									<type>bos</type>
 									<file>${project.build.directory}/${project.artifactId}-${project.version}.bos</file>
+								</artifact>
+								<artifact>
+									<type>xml</type>
+									<file>${project.build.directory}/${project.artifactId}-${project.version}.xml</file>
 								</artifact>
 							</artifacts>
 						</configuration>

@@ -154,15 +154,30 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptors>
-						<descriptor>bos-assembly.xml</descriptor>
-					</descriptors>
-					<appendAssemblyId>false</appendAssemblyId>
-					<attach>false</attach>
-				</configuration>
 				<executions>
 					<execution>
+						<id>bos</id>
+						<configuration>
+							<descriptors>
+								<descriptor>bos-assembly.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>true</appendAssemblyId>
+							<attach>false</attach>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>zip</id>
+						<configuration>
+							<descriptors>
+								<descriptor>zip-assembly.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>false</appendAssemblyId>
+							<attach>false</attach>
+						</configuration>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
@@ -295,7 +310,7 @@
 						<id>rename-to-bos-extension</id>
 						<phase>package</phase>
 						<configuration>
-							<sourceFile>${project.build.directory}/${project.artifactId}-${project.version}.zip</sourceFile>
+							<sourceFile>${project.build.directory}/${project.artifactId}-${project.version}-bos.zip</sourceFile>
 							<destinationFile>${project.build.directory}/${project.artifactId}-${project.version}.bos</destinationFile>
 							<overWrite>true</overWrite>
 						</configuration>
@@ -331,6 +346,10 @@
 								<artifact>
 									<type>bos</type>
 									<file>${project.build.directory}/${project.artifactId}-${project.version}.bos</file>
+								</artifact>
+								<artifact>
+									<type>zip</type>
+									<file>${project.build.directory}/${project.artifactId}-${project.version}.zip</file>
 								</artifact>
 								<artifact>
 									<type>xml</type>

@@ -2,7 +2,7 @@
 	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
-	<id>bos-assembly</id>
+	<id>bos</id>
 	<formats>
 		<format>zip</format>
 	</formats>
@@ -49,6 +49,7 @@
 				<exclude>**/node/**</exclude>
 				<exclude>**/node_modules/**</exclude>
 				<exclude>**/target/**</exclude>
+				<exclude>applications/*.png</exclude>
 			</excludes>
 		</fileSet>
 	</fileSets>

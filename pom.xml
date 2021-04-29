@@ -12,9 +12,6 @@
 
 	<properties>
 		<web.pages.dir>web_page</web.pages.dir>
-		<living-app-layout-id>LayoutBonitaV8</living-app-layout-id>
-		<user-app-caselist-id>UserCaseListBonitaV4</user-app-caselist-id>
-		<user-app-casedetails-id>UserCaseDetailsBonitaV1</user-app-casedetails-id>
 		<web.widgets.dir>web_widgets</web.widgets.dir>
 	</properties>
 
@@ -51,6 +48,10 @@
 					<version>1.8</version>
 				</plugin>
 				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>3.1.2</version>
+				</plugin>
+				<plugin>
 					<groupId>com.coderplus.maven.plugins</groupId>
 					<artifactId>copy-rename-maven-plugin</artifactId>
 					<version>1.0</version>
@@ -78,11 +79,11 @@
 									<groupId>org.bonitasoft.web.page</groupId>
 									<artifactId>page-user-case-list</artifactId>
 									<version>${project.version}</version>
+									<classifier>sources</classifier>
 									<type>zip</type>
 								</artifactItem>
 							</artifactItems>
-							<includes>resources/page.json,resources/assets/**</includes>
-							<outputDirectory>${web.pages.dir}/${user-app-caselist-id}</outputDirectory>
+							<outputDirectory>${web.pages.dir}</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
@@ -99,11 +100,11 @@
 									<groupId>org.bonitasoft.web.page</groupId>
 									<artifactId>page-user-case-details</artifactId>
 									<version>${project.version}</version>
+									<classifier>sources</classifier>
 									<type>zip</type>
 								</artifactItem>
 							</artifactItems>
-							<includes>resources/page.json,resources/assets/**</includes>
-							<outputDirectory>${web.pages.dir}/${user-app-casedetails-id}</outputDirectory>
+							<outputDirectory>${web.pages.dir}</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
@@ -120,11 +121,11 @@
 									<groupId>org.bonitasoft.web.page</groupId>
 									<artifactId>layout-bonita</artifactId>
 									<version>${project.version}</version>
+									<classifier>sources</classifier>
 									<type>zip</type>
 								</artifactItem>
 							</artifactItems>
-							<includes>resources/page.json,resources/assets/**</includes>
-							<outputDirectory>${web.pages.dir}/${living-app-layout-id}</outputDirectory>
+							<outputDirectory>${web.pages.dir}</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>
@@ -142,6 +143,12 @@
 									<artifactId>layout-bonita</artifactId>
 									<version>${project.version}</version>
 									<type>zip</type>
+									<fileMappers>
+										<org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+											<pattern>^\Qresources/widgets/\E</pattern>
+											<replacement>./</replacement>
+										</org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+									</fileMappers>
 								</artifactItem>
 							</artifactItems>
 							<includes>resources/widgets/custom*/**</includes>
@@ -202,110 +209,12 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>move-user-caselist-page-resources</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<target>
-								<move todir="${web.pages.dir}/${user-app-caselist-id}"
-									failonerror="true">
-									<fileset dir="${web.pages.dir}/${user-app-caselist-id}/resources" />
-								</move>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>move-user-casedetails-page-resources</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<target>
-								<move todir="${web.pages.dir}/${user-app-casedetails-id}"
-									  failonerror="true">
-									<fileset dir="${web.pages.dir}/${user-app-casedetails-id}/resources" />
-								</move>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>move-layout-page-resources</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<target>
-								<move todir="${web.pages.dir}/${living-app-layout-id}"
-									failonerror="true">
-									<fileset dir="${web.pages.dir}/${living-app-layout-id}/resources" />
-								</move>
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>move-widgets</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<target>
-								<move todir="${web.widgets.dir}">
-									<fileset dir="${web.widgets.dir}/resources/widgets">
-										<include name="**" />
-									</fileset>
-								</move>
-								<delete dir="${web.widgets.dir}/resources" failonerror="true" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
 				</executions>
 			</plugin>
 			<plugin>
 				<groupId>com.coderplus.maven.plugins</groupId>
 				<artifactId>copy-rename-maven-plugin</artifactId>
 				<executions>
-					<execution>
-						<id>rename-user-caselist-page-json-file</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<sourceFile>${web.pages.dir}/${user-app-caselist-id}/page.json</sourceFile>
-							<destinationFile>${web.pages.dir}/${user-app-caselist-id}/${user-app-caselist-id}.json</destinationFile>
-							<overWrite>true</overWrite>
-						</configuration>
-						<goals>
-							<goal>rename</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>rename-user-casedetails-page-json-file</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<sourceFile>${web.pages.dir}/${user-app-casedetails-id}/page.json</sourceFile>
-							<destinationFile>${web.pages.dir}/${user-app-casedetails-id}/${user-app-casedetails-id}.json</destinationFile>
-							<overWrite>true</overWrite>
-						</configuration>
-						<goals>
-							<goal>rename</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>rename-layout-page-json-file</id>
-						<phase>generate-sources</phase>
-						<configuration>
-							<sourceFile>${web.pages.dir}/${living-app-layout-id}/page.json</sourceFile>
-							<destinationFile>${web.pages.dir}/${living-app-layout-id}/${living-app-layout-id}.json</destinationFile>
-							<overWrite>true</overWrite>
-						</configuration>
-						<goals>
-							<goal>rename</goal>
-						</goals>
-					</execution>
 					<execution>
 						<id>rename-to-bos-extension</id>
 						<phase>package</phase>
@@ -362,5 +271,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

@@ -30,8 +30,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.bonitasoft.web.page</groupId>
+			<artifactId>page-user-task-list</artifactId>
+			<version>${project.version}</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.bonitasoft.web.page</groupId>
+			<artifactId>page-user-process-list</artifactId>
+			<version>${project.version}</version>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.bonitasoft.web.page</groupId>
 			<artifactId>layout-bonita</artifactId>
 			<version>${project.version}</version>
+			<scope>provided</scope>
 			<type>zip</type>
 		</dependency>
 	</dependencies>
@@ -68,7 +81,7 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>get-bonita-user-caselist-page</id>
+						<id>get-bonita-pages</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack</goal>
@@ -82,20 +95,6 @@
 									<classifier>sources</classifier>
 									<type>zip</type>
 								</artifactItem>
-							</artifactItems>
-							<outputDirectory>${web.pages.dir}</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
-					</execution>
-					<execution>
-						<id>get-bonita-user-casedetails-page</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
 								<artifactItem>
 									<groupId>org.bonitasoft.web.page</groupId>
 									<artifactId>page-user-case-details</artifactId>
@@ -103,20 +102,6 @@
 									<classifier>sources</classifier>
 									<type>zip</type>
 								</artifactItem>
-							</artifactItems>
-							<outputDirectory>${web.pages.dir}</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
-					</execution>
-					<execution>
-						<id>get-bonita-layout-page</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
 								<artifactItem>
 									<groupId>org.bonitasoft.web.page</groupId>
 									<artifactId>layout-bonita</artifactId>
@@ -231,7 +216,7 @@
 						<id>prepare-xml-artifact</id>
 						<phase>package</phase>
 						<configuration>
-							<sourceFile>applications/${project.artifactId}.xml</sourceFile>
+							<sourceFile>bonita-distrib/${project.artifactId}.xml</sourceFile>
 							<destinationFile>${project.build.directory}/${project.artifactId}-${project.version}.xml</destinationFile>
 							<overWrite>true</overWrite>
 						</configuration>

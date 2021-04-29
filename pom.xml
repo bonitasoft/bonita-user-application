@@ -216,7 +216,7 @@
 						<id>prepare-xml-artifact</id>
 						<phase>package</phase>
 						<configuration>
-							<sourceFile>applications/${project.artifactId}.xml</sourceFile>
+							<sourceFile>bonita-distrib/${project.artifactId}.xml</sourceFile>
 							<destinationFile>${project.build.directory}/${project.artifactId}-${project.version}.xml</destinationFile>
 							<overWrite>true</overWrite>
 						</configuration>

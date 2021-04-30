@@ -51,5 +51,20 @@
 				<exclude>**/target/**</exclude>
 			</excludes>
 		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}</directory>
+			<includes>
+				<include>web_page/**</include>
+				<include>web_widgets/custom*/**</include>
+				<include>web_fragments/**</include>
+				<include>restAPIExtensions/**</include>
+				<include>themes/**</include>
+			</includes>
+			<excludes>
+				<exclude>**/node/**</exclude>
+				<exclude>**/node_modules/**</exclude>
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
 	</fileSets>
 </assembly>

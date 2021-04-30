@@ -11,8 +11,8 @@
 	<name>Bonita User Application</name>
 
 	<properties>
-		<web.pages.dir>web_page</web.pages.dir>
-		<web.widgets.dir>web_widgets</web.widgets.dir>
+		<web.pages.dir>${project.build.directory}/web_page</web.pages.dir>
+		<web.widgets.dir>${project.build.directory}/web_widgets</web.widgets.dir>
 	</properties>
 
 	<dependencies>
@@ -55,10 +55,6 @@
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>3.1.1</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.8</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -173,25 +169,6 @@
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>clean</id>
-						<phase>clean</phase>
-						<configuration>
-							<target>
-								<delete dir="${web.pages.dir}" failonerror="true" />
-								<delete dir="${web.widgets.dir}" failonerror="true" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>

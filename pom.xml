@@ -43,6 +43,7 @@
 		<dependency>
 			<groupId>org.bonitasoft.web.page</groupId>
 			<artifactId>layout-bonita</artifactId>
+			<!-- already provided by the distrib -->
 			<version>${project.version}</version>
 			<scope>provided</scope>
 			<type>zip</type>
@@ -77,7 +78,7 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>get-bonita-pages</id>
+						<id>get-bonita-pages-sources</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack</goal>
@@ -171,6 +172,20 @@
 							<goal>single</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>zip-with-resources</id>
+						<configuration>
+							<descriptors>
+								<descriptor>zip-with-resources-assembly.xml</descriptor>
+							</descriptors>
+							<appendAssemblyId>true</appendAssemblyId>
+							<attach>false</attach>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -221,6 +236,11 @@
 								<artifact>
 									<type>zip</type>
 									<file>${project.build.directory}/${project.artifactId}-${project.version}.zip</file>
+								</artifact>
+								<artifact>
+									<type>zip</type>
+									<classifier>with-resources</classifier>
+									<file>${project.build.directory}/${project.artifactId}-${project.version}-with-resources.zip</file>
 								</artifact>
 								<artifact>
 									<type>xml</type>

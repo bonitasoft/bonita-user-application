@@ -9,6 +9,7 @@
 	<packaging>pom</packaging>
 
 	<name>Bonita User Application</name>
+	<description>This applications allows to start or work on cases you are involved in.</description>
 
 	<properties>
 		<web.pages.dir>${project.build.directory}/web_page</web.pages.dir>

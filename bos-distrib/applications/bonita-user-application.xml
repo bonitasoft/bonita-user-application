@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <applications xmlns="http://documentation.bonitasoft.com/application-xml-schema/1.0">
     <application token="userApp" version="2.2" profile="User" homePage="task-list" state="ACTIVATED" layout="custompage_BonitaLayoutV8" theme="custompage_themeBonita">
-        <displayName>Bonita User Application</displayName>
-        <description>This applications allows to start or work on cases you are involved in.</description>
+        <displayName>${name}</displayName>
+        <description>${description}</description>
         <iconPath>bonita-user-application.png</iconPath>
         <applicationPages>
             <applicationPage customPage="custompage_UserCaseDetailsBonitaV1" token="case-details"/>

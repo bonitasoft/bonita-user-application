@@ -6,3 +6,4 @@
 .settings
 .project
 bonita-user-application.iml
+.DS_Store

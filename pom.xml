@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 
 	<name>Bonita User Application</name>
-	<description>This applications allows to start or work on cases you are involved in.</description>
+	<description>This application allows you to start or work on cases you are involved in.</description>
 
 	<properties>
 		<application.version>2.2</application.version>

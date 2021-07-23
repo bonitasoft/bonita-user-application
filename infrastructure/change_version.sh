@@ -34,4 +34,4 @@ CUR_VERSION=$(get_current_version pom.xml)
 
 echo "--- Changing version from $CUR_VERSION to $RELEASE_VERSION"
 # replace first <version> value in poms
-find . -name "pom.xml" | while read pom; do replace_first_version $RELEASE_VERSION "$pom"; done
+find . -path ./bos-distrib -prune -false -o -name "pom.xml" | while read pom; do replace_first_version $RELEASE_VERSION "$pom"; done

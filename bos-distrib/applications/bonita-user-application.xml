@@ -5,7 +5,7 @@
         <description>${description}</description>
         <iconPath>bonita-user-application.png</iconPath>
         <applicationPages>
-            <applicationPage customPage="custompage_UserCaseDetailsBonitaV1" token="case-details"/>
+            <applicationPage customPage="custompage_UserCaseDetailsBonitaV2" token="case-details"/>
             <applicationPage customPage="custompage_tasklist" token="task-list"/>
             <applicationPage customPage="custompage_UserCaseListBonitaV4" token="case-list"/>
             <applicationPage customPage="custompage_processlistBonita" token="process-list"/>

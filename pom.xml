@@ -15,6 +15,7 @@
 		<application.version>2.2</application.version>
 		<web.pages.dir>${project.build.directory}/web_page</web.pages.dir>
 		<web.widgets.dir>${project.build.directory}/web_widgets</web.widgets.dir>
+		<web.fragments.dir>${project.build.directory}/web_fragments</web.fragments.dir>
 	</properties>
 
 	<dependencies>
@@ -137,6 +138,33 @@
 							</artifactItems>
 							<includes>resources/widgets/custom*/**</includes>
 							<outputDirectory>${web.widgets.dir}</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+					<execution>
+						<id>get-bonita-fragments</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.bonitasoft.web.page</groupId>
+									<artifactId>page-user-case-list</artifactId>
+									<version>${project.version}</version>
+									<type>zip</type>
+									<fileMappers>
+										<org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+											<pattern>^\Qresources/fragments/\E</pattern>
+											<replacement>./</replacement>
+										</org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+									</fileMappers>
+								</artifactItem>
+							</artifactItems>
+							<includes>resources/fragments/*/**</includes>
+							<outputDirectory>${web.fragments.dir}</outputDirectory>
 							<overWriteReleases>true</overWriteReleases>
 							<overWriteSnapshots>true</overWriteSnapshots>
 						</configuration>

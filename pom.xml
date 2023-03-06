@@ -12,7 +12,7 @@
 	<description>This application allows you to start or work on cases you are involved in.</description>
 
 	<properties>
-		<application.version>2.3</application.version>
+		<application.version>2.4</application.version>
 		<web.pages.dir>${project.build.directory}/web_page</web.pages.dir>
 		<web.widgets.dir>${project.build.directory}/web_widgets</web.widgets.dir>
 	</properties>

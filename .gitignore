@@ -7,3 +7,4 @@
 .project
 bonita-user-application.iml
 .DS_Store
+.flattened-pom.xml

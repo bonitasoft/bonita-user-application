@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.bonitasoft.web.application</groupId>
     <artifactId>bonita-user-application</artifactId>
@@ -34,7 +34,7 @@
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <application.version>5.0</application.version>
+        <application.version>6.0</application.version>
         <web.pages.dir>${project.build.directory}/web_page</web.pages.dir>
         <web.widgets.dir>${project.build.directory}/web_widgets</web.widgets.dir>
         <web.fragments.dir>${project.build.directory}/web_fragments</web.fragments.dir>
@@ -93,7 +93,8 @@
                     <version>${maven-assembly-plugin.version}</version>
                     <configuration>
                         <descriptorSourceDirectory>
-                            ${project.basedir}/src/assembly</descriptorSourceDirectory>
+                            ${project.basedir}/src/assembly
+                        </descriptorSourceDirectory>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -133,10 +134,10 @@
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${build-helper-maven-plugin.version}</version>
                 </plugin>
-                    <plugin>
-                  <groupId>org.codehaus.mojo</groupId>
-                  <artifactId>flatten-maven-plugin</artifactId>
-                  <version>${flatten-maven-plugin.version}</version>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -299,54 +300,57 @@
                                 <artifact>
                                     <type>bos</type>
                                     <file>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}.bos</file>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}.bos
+                                    </file>
                                 </artifact>
                                 <artifact>
                                     <type>zip</type>
                                     <classifier>descriptor</classifier>
                                     <file>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-descriptor.zip</file>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-descriptor.zip
+                                    </file>
                                 </artifact>
                                 <artifact>
                                     <type>zip</type>
                                     <classifier>application</classifier>
                                     <file>
-                                        ${project.build.directory}/${project.artifactId}-${project.version}-application.zip</file>
+                                        ${project.build.directory}/${project.artifactId}-${project.version}-application.zip
+                                    </file>
                                 </artifact>
                             </artifacts>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-             <plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
                 <executions>
-                  <!-- enable flattening -->
-                  <execution>
-                    <id>flatten</id>
-                    <goals>
-                      <goal>flatten</goal>
-                    </goals>
-                    <phase>process-resources</phase>
-                    <configuration>
-                      <flattenMode>ossrh</flattenMode>
-                      <updatePomFile>true</updatePomFile>
-                      <pomElements>
-                        <dependencies>remove</dependencies>
-                      </pomElements>
-                    </configuration>
-                  </execution>
-                  <!-- ensure proper cleanup -->
-                  <execution>
-                    <id>flatten.clean</id>
-                    <goals>
-                      <goal>clean</goal>
-                    </goals>
-                    <phase>clean</phase>
-                  </execution>
+                    <!-- enable flattening -->
+                    <execution>
+                        <id>flatten</id>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <flattenMode>ossrh</flattenMode>
+                            <updatePomFile>true</updatePomFile>
+                            <pomElements>
+                                <dependencies>remove</dependencies>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                    <!-- ensure proper cleanup -->
+                    <execution>
+                        <id>flatten.clean</id>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <phase>clean</phase>
+                    </execution>
                 </executions>
-              </plugin>
+            </plugin>
         </plugins>
     </build>
     <profiles>
@@ -386,7 +390,8 @@
                 <repository>
                     <id>ossrh</id>
                     <url>
-                        https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                        https://oss.sonatype.org/service/local/staging/deploy/maven2/
+                    </url>
                 </repository>
                 <snapshotRepository>
                     <id>ossrh</id>

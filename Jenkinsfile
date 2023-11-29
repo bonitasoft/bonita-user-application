@@ -6,7 +6,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '3'))
     }
     environment {
-        JAVA_HOME = "${env.JAVA_HOME_11}"
+        JAVA_HOME = "${env.JAVA_HOME_17}"
         JAVA_TOOL_OPTIONS = ''
         MAVEN_OPTS = '-Dstyle.color=always -Djansi.passthrough=true'
     }

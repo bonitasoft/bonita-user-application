@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
-    <version>${application.version}</version>
+    <version>9.0.4</version>
 
     <name>${name}</name>
     <description>${description}</description>

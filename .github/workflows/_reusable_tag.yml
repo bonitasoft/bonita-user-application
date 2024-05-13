@@ -1,0 +1,49 @@
+name: Create Tag
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+    secrets:
+      BONITA_CI_PAT:
+        required: true
+      KSM_CONFIG:
+        required: true
+
+jobs:
+  create_tag:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: bonitasoft/bonita-user-application
+          token: ${{ secrets.BONITA_CI_PAT }}
+
+      - name: Git Setup
+        uses: bonitasoft/git-setup-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Create Release Branch
+        run: git checkout -B release/${{ inputs.version }}
+
+      - name: Change Version
+        run: ./mvnw versions:set -DnewVersion=${{ inputs.version }}
+
+      - name: Commit and Push Tag
+        run: |
+          git commit -a -m "release(${{ inputs.version }}) create release ${{ inputs.version }}" 
+          git tag -a ${{ inputs.version }} -m "Release ${{ inputs.version }}"
+          git push origin ${{ inputs.version }}:${{ inputs.version }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.BONITA_CI_PAT }}
+        with:
+          tag_name: ${{ inputs.version }}
+          release_name: Release ${{ inputs.version }}

@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - "[0-9]+.[0-9]+.x"
+      - "master"
+      - "release-*"
+      - "dev"
+    paths-ignore:
+      - ".github/**"
+      - "**/README.md"
+      - "!.github/workflows/build.yml"
+      - "!.github/workflows/_reusable_build.yml"
+
+jobs:
+  build:
+    uses: ./.github/workflows/_reusable_build.yml
+    with:
+      publish: true
+    secrets: inherit

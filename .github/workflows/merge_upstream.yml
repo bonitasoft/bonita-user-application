@@ -1,0 +1,14 @@
+name: Merge Upstream
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "[0-9]+.[0-9]+.x"
+      - "master"
+      - "release-*"
+
+jobs:
+  merge-upstream:
+    uses: bonitasoft/github-workflows/.github/workflows/_reusable_merge_upstream.yml@main
+    secrets: inherit

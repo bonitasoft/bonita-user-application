@@ -1,0 +1,65 @@
+name: Resuable Build
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ${{ github.ref }}
+        description: The branch ref to build. Leave empty to use workflow branch.
+      publish:
+        type: boolean
+        default: false
+        description: To publish the project artifacts on Bonita Artifact Repository.
+      release:
+        type: boolean
+        default: false
+        description: To indicate that the current build is for a release (it will publish artifacts as well).
+
+    secrets:
+      BONITA_CI_PAT:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: bonitasoft/bonita-user-application
+          token: ${{ secrets.BONITA_CI_PAT }}
+          ref: ${{ inputs.ref }}
+
+      - name: ☕ Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: maven
+
+      - name: Configure Maven Settings
+        uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Maven Build
+        if: ${{ !inputs.publish }}
+        timeout-minutes: 60
+        run: ./mvnw -ntp verify
+
+      - name: Maven Build & Deploy snapshot
+        if: ${{ inputs.publish && !inputs.release }}
+        timeout-minutes: 60
+        run: ./mvnw -ntp deploy -DaltDeploymentRepository=snapshots::${{ vars.SNAPSHOTS_REPOSITORY_URL }}
+
+      - name: Maven Build & Deploy release
+        if: ${{ inputs.release }}
+        timeout-minutes: 60
+        run: ./mvnw -ntp deploy -DaltDeploymentRepository=staging::${{ vars.STAGING_REPOSITORY_URL }}
+
+      - name: Upload BOS to the Github release
+        if: ${{ inputs.release }}
+        env:
+          GH_TOKEN: ${{ secrets.BONITA_CI_PAT }}
+        run: gh release upload ${{ inputs.ref }} ./target/bonita-user-application-${{ inputs.ref }}.bos

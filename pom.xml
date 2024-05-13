@@ -65,6 +65,10 @@
 					<version>3.1.2</version>
 				</plugin>
 				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.1.1</version>
+				</plugin>
+				<plugin>
 					<groupId>com.coderplus.maven.plugins</groupId>
 					<artifactId>copy-rename-maven-plugin</artifactId>
 					<version>1.0</version>

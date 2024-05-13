@@ -1,0 +1,48 @@
+name: Update Version
+
+on:
+  workflow_call: 
+    inputs:
+      version:
+        type: string
+        required: true
+    secrets:
+      KSM_CONFIG:
+        required: true
+      BONITA_CI_PAT:
+        required: true
+
+jobs:
+  update-version:
+    runs-on: ubuntu-22.04
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          repository: bonitasoft/bonita-user-application
+          ref: ${{ github.ref }}
+          token: ${{ secrets.BONITA_CI_PAT }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      - name: Setup Maven
+        uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Update version
+        run: ./mvnw -B -ntp versions:set -DnewVersion=${{ inputs.version }}
+
+      - name: Git Setup
+        uses: bonitasoft/git-setup-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Commit and push
+        run: |
+          git commit -a -m "chore(versioning): update version to ${{ inputs.version }}"
+          git push

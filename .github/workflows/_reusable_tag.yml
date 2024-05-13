@@ -31,7 +31,7 @@ jobs:
         run: git checkout -B release/${{ inputs.version }}
 
       - name: Change Version
-        run: ./mvnw versions:set -DnewVersion=${{ inputs.version }}
+        run: ./mvnw -ntp versions:set -DnewVersion=${{ inputs.version }}
 
       - name: Commit and Push Tag
         run: |

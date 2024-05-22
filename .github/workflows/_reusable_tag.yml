@@ -21,6 +21,7 @@ jobs:
         with:
           repository: bonitasoft/bonita-user-application
           token: ${{ secrets.BONITA_CI_PAT }}
+          ref: ${{ github.ref }}
 
       - name: Git Setup
         uses: bonitasoft/git-setup-action@v1
@@ -47,3 +48,4 @@ jobs:
         with:
           tag_name: ${{ inputs.version }}
           release_name: Release ${{ inputs.version }}
+          repo: bonita-user-application

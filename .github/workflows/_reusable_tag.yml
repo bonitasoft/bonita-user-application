@@ -41,11 +41,6 @@ jobs:
           git push origin ${{ inputs.version }}:${{ inputs.version }}
 
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.BONITA_CI_PAT }}
-        with:
-          tag_name: ${{ inputs.version }}
-          release_name: Release ${{ inputs.version }}
-          repo: bonita-user-application
+          GH_TOKEN: ${{ secrets.BONITA_CI_PAT }}
+        run: gh release create ${{ inputs.version }} --generate-notes --repo bonitasoft/bonita-user-application

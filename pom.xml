@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.bonitasoft.web.application</groupId>
     <artifactId>bonita-user-application</artifactId>
-    <version>10.2-SNAPSHOT</version>
+    <version>10.1.0.W21</version>
     <packaging>pom</packaging>
 
     <name>Bonita User Application</name>

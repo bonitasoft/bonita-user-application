@@ -53,7 +53,27 @@ jobs:
   merge-upstream:
     needs: update-version
     if: ${{ inputs.merge-upstream-ignoring-conflicts }}
-    uses: bonitasoft/github-workflows/.github/workflows/_reusable_merge_upstream.yml@main
-    with:
-      ignore-conflicts: true
-    secrets: inherit
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Setup git
+        uses: bonitasoft/git-setup-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Determine upstream branch
+        id: upstream-branch
+        run: echo "ref=${{ fromJson(vars.SUPPORTED_BRANCHES).upstream-branch[github.ref_name] }}" >> $GITHUB_OUTPUT
+
+      - name: Checkout upstream branch
+        uses: actions/checkout@v4
+        with:
+          repository: bonitasoft/bonita-user-application
+          ref: ${{ steps.upstream-branch.outputs.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.BONITA_CI_PAT }}
+
+      - name: Merge upstream branch
+        run: |
+           git config merge.ours.driver true
+           git merge origin/${{ github.ref_name }} -X ours  -m "chore(merge): ${{ github.ref_name }} into ${{ steps.upstream-branch.outputs.ref }}"
+           git push

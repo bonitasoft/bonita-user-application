@@ -6,6 +6,9 @@ on:
       version:
         type: string
         required: true
+      merge-upstream-ignoring-conflicts:
+        type: boolean
+        default: false
     secrets:
       KSM_CONFIG:
         required: true
@@ -46,3 +49,11 @@ jobs:
         run: |
           git commit -a -m "chore(versioning): update version to ${{ inputs.version }}"
           git push
+
+  merge-upstream:
+    needs: update-version
+    if: ${{ inputs.merge-upstream-ignoring-conflicts }}
+    uses: bonitasoft/github-workflows/.github/workflows/_reusable_merge_upstream.yml@main
+    with:
+      ignore-conflicts: true
+    secrets: inherit

@@ -34,7 +34,7 @@
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <application.version>6.2</application.version>
+        <application.version>6.3</application.version>
         <web.pages.dir>${project.build.directory}/web_page</web.pages.dir>
         <web.widgets.dir>${project.build.directory}/web_widgets</web.widgets.dir>
         <web.fragments.dir>${project.build.directory}/web_fragments</web.fragments.dir>

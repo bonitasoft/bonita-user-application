@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.bonitasoft.web.application</groupId>
+  <artifactId>bonita-user-application</artifactId>
+  <version>10.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Bonita User Application</name>
+  <description>This application allows you to start or work on cases you are involved in.</description>
+  <url>https://www.bonitasoft.com</url>
+  <licenses>
+    <license>
+      <name>GPL-v2.0</name>
+      <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>bonitasoft</id>
+      <name>Bonitasoft</name>
+      <email>rd.user@bonitasoft.com</email>
+      <organization>Bonitasoft</organization>
+      <organizationUrl>https://www.bonitasoft.com</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git@github.com:bonitasoft/bonita-user-application.git</connection>
+    <developerConnection>scm:git:git@github.com:bonitasoft/bonita-user-application.git</developerConnection>
+    <url>https://github.com/bonitasoft/bonita-user-application</url>
+  </scm>
+</project>

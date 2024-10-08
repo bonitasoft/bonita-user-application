@@ -17,6 +17,11 @@
 			<nonFilteredFileExtensions>
 				<nonFilteredFileExtension>png</nonFilteredFileExtension>
 				<nonFilteredFileExtension>zip</nonFilteredFileExtension>
+				<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+				<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+				<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+				<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+				<nonFilteredFileExtension>svg</nonFilteredFileExtension>
 			</nonFilteredFileExtensions>
 			<outputDirectory>/</outputDirectory>
 		</fileSet>

@@ -78,7 +78,7 @@ jobs:
         env:
           REDIRECT_ID: ${{ vars.BOS_REDIRECT_USER_APP_ID }}
           BOS_REDIRECT_URL: https://redirect.bonitasoft.com/
-          BOS_RELEASE_ASSET_URL: https"%"3A"%"2F"%"2Fgithub.com%"2Fbonitasoft%"2Fbonita-user-application%"2Freleases%"2Fdownload%"2F${{ inputs.ref }}%"2Fbonita-user-application-${{ inputs.ref }}.bos
+          BOS_RELEASE_ASSET_URL: https%3A%2F%2Fgithub.com%2Fbonitasoft%2Fbonita-user-application%2Freleases%2Fdownload%2F${{ inputs.ref }}%2Fbonita-user-application-${{ inputs.ref }}.bos
         run: | 
           MAINTENANCE_VERSION="$(cut -d '.' -f3 <<< ${{ inputs.ref }})"
           MAJOR_VERSION="$(cut -d '.' -f1,2 <<< ${{ inputs.ref }})"

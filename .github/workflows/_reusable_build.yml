@@ -1,4 +1,4 @@
-name: Resuable Build
+name: Reusable Build
 
 on:
   workflow_call:
@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -79,7 +79,7 @@ jobs:
           REDIRECT_ID: ${{ vars.BOS_REDIRECT_USER_APP_ID }}
           BOS_REDIRECT_URL: https://redirect.bonitasoft.com/
           BOS_RELEASE_ASSET_URL: https%3A%2F%2Fgithub.com%2Fbonitasoft%2Fbonita-user-application%2Freleases%2Fdownload%2F${{ inputs.ref }}%2Fbonita-user-application-${{ inputs.ref }}.bos
-        run: | 
+        run: |
           MAINTENANCE_VERSION="$(cut -d '.' -f3 <<< ${{ inputs.ref }})"
           MAJOR_VERSION="$(cut -d '.' -f1,2 <<< ${{ inputs.ref }})"
           STATUS_CODE=$(curl -s -o /dev/null -L -w "%{http_code}\\n" "$BOS_REDIRECT_URL" -u "$BOS_REDIRECT_USER:$BOS_REDIRECT_PSW" -H "Content-Type: application/x-www-form-urlencoded" --data "id=$REDIRECT_ID&product=bos&major_version=$MAJOR_VERSION&minor_version=$MAINTENANCE_VERSION&URL=$BOS_RELEASE_ASSET_URL&description=Bonita+User+App&submit=true")

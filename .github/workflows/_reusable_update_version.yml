@@ -1,7 +1,7 @@
 name: Update Version
 
 on:
-  workflow_call: 
+  workflow_call:
     inputs:
       version:
         type: string
@@ -19,8 +19,8 @@ jobs:
   update-version:
     runs-on: ubuntu-24.04
     steps:
-
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           repository: bonitasoft/bonita-user-application
           ref: ${{ github.ref }}
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'temurin'
+          distribution: temurin
 
       - name: Setup Maven
         uses: bonitasoft/maven-settings-action@v1
@@ -74,6 +74,6 @@ jobs:
 
       - name: Merge upstream branch
         run: |
-           git config merge.ours.driver true
-           git merge origin/${{ github.ref_name }} -X ours  -m "chore(merge): ${{ github.ref_name }} into ${{ steps.upstream-branch.outputs.ref }}"
-           git push
+          git config merge.ours.driver true
+          git merge origin/${{ github.ref_name }} -X ours  -m "chore(merge): ${{ github.ref_name }} into ${{ steps.upstream-branch.outputs.ref }}"
+          git push

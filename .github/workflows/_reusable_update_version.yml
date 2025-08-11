@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: bonitasoft/bonita-user-application
           ref: ${{ github.ref }}
@@ -65,7 +65,7 @@ jobs:
         run: echo "ref=${{ fromJson(vars.SUPPORTED_BRANCHES).upstream-branch[github.ref_name] }}" >> $GITHUB_OUTPUT
 
       - name: Checkout upstream branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: bonitasoft/bonita-user-application
           ref: ${{ steps.upstream-branch.outputs.ref }}

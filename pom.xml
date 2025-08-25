@@ -47,7 +47,7 @@
     <central-publishing-maven-plugin>0.8.0</central-publishing-maven-plugin>
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <gmavenplus-plugin.version>4.2.1</gmavenplus-plugin.version>
-    <flatten-maven-plugin.version>1.7.1</flatten-maven-plugin.version>
+    <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
     <groovy.version>3.0.25</groovy.version>
   </properties>
 

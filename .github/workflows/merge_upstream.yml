@@ -1,3 +1,6 @@
+# This workflow merges changes from downstream branches to upstream branches.
+# If a commit contains [ignore-conflicts] in its message, conflicts will be
+# automatically resolved using the "ours" merge strategy.
 name: Merge Upstream
 
 on:
@@ -11,4 +14,7 @@ on:
 jobs:
   merge-upstream:
     uses: bonitasoft/github-workflows/.github/workflows/_reusable_merge_upstream.yml@main
+    with:
+      # Ignore conflicts if the keyword [ignore-conflicts] is present in the commit message
+      ignore-conflicts: ${{ contains(github.event.head_commit.message, '[ignore-conflicts]') }}
     secrets: inherit

@@ -31,6 +31,7 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
+          cache: maven
 
       - name: Setup Maven
         uses: bonitasoft/maven-settings-action@v1
@@ -45,35 +46,10 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
+      # Add [ignore-conflicts] keyword to commit body message to be read by merge_upstream workflow
       - name: Commit and push
         run: |
-          git commit -a -m "chore(versioning): update version to ${{ inputs.version }}"
-          git push
-
-  merge-upstream:
-    needs: update-version
-    if: ${{ inputs.merge-upstream-ignoring-conflicts }}
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Setup git
-        uses: bonitasoft/git-setup-action@v1
-        with:
-          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-
-      - name: Determine upstream branch
-        id: upstream-branch
-        run: echo "ref=${{ fromJson(vars.SUPPORTED_BRANCHES).upstream-branch[github.ref_name] }}" >> $GITHUB_OUTPUT
-
-      - name: Checkout upstream branch
-        uses: actions/checkout@v6
-        with:
-          repository: bonitasoft/bonita-user-application
-          ref: ${{ steps.upstream-branch.outputs.ref }}
-          fetch-depth: 0
-          token: ${{ secrets.BONITA_CI_PAT }}
-
-      - name: Merge upstream branch
-        run: |
-          git config merge.ours.driver true
-          git merge origin/${{ github.ref_name }} -X ours  -m "chore(merge): ${{ github.ref_name }} into ${{ steps.upstream-branch.outputs.ref }}"
+          git commit -a \
+            -m "chore(versioning): update version to ${{ inputs.version }}" \
+            ${{ inputs.merge-upstream-ignoring-conflicts && '-m "[ignore-conflicts]"' || '' }}
           git push

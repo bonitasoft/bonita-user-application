@@ -29,4 +29,13 @@
         <application.version>8.0</application.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.bonitasoft.web.page</groupId>
+            <artifactId>page-user-delegation</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+    </dependencies>
+
 </project>

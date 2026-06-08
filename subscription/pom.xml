@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.bonitasoft.web.application</groupId>
+        <artifactId>bonita-user-application</artifactId>
+        <version>11.1-SNAPSHOT</version>
+        <relativePath>../community</relativePath>
+    </parent>
+
+    <groupId>com.bonitasoft.web.application</groupId>
+    <artifactId>bonita-user-application-sp</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Bonita User Application</name>
+    <description>This application allows you to start or work on cases you are involved in.</description>
+
+    <licenses>
+        <license>
+            <name>Bonitasoft Software License</name>
+            <url>http://www.bonitasoft.com</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <application.version>7.0</application.version>
+    </properties>
+
+</project>

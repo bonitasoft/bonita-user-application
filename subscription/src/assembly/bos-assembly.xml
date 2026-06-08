@@ -1,0 +1,42 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 https://maven.apache.org/xsd/assembly-2.2.0.xsd">
+	<id>bos</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.outputDirectory}/bos-distrib/</directory>
+			<includes>
+				<include>**</include>
+			</includes>
+			<filtered>true</filtered>
+			<nonFilteredFileExtensions>
+				<nonFilteredFileExtension>png</nonFilteredFileExtension>
+				<nonFilteredFileExtension>zip</nonFilteredFileExtension>
+				<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+				<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+				<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+				<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+				<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+			</nonFilteredFileExtensions>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}</directory>
+			<includes>
+				<include>web_page/**</include>
+				<include>web_widgets/custom*/**</include>
+				<include>web_fragments/**</include>
+				<include>restAPIExtensions/**</include>
+				<include>themes/**</include>
+			</includes>
+			<excludes>
+				<exclude>**/node/**</exclude>
+				<exclude>**/node_modules/**</exclude>
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>

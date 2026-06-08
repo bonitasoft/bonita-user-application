@@ -19,10 +19,11 @@ pipeline {
                 }
             }
         }
-        stage('Upload BOS File') {
+        stage('Upload BOS Files') {
             steps {
                 withCredentials([string(credentialsId: 'github-api', variable: 'GITHUB_API_TOKEN')]) {
-                    sh "./infrastructure/upload-github-release-asset.sh github_api_token=$GITHUB_API_TOKEN tag=${params.version} filename=./target/bonita-user-application-${params.version}.bos" 
+                    sh "./infrastructure/upload-github-release-asset.sh github_api_token=$GITHUB_API_TOKEN tag=${params.version} filename=./community/target/bonita-user-application-${params.version}.bos"
+                    sh "./infrastructure/upload-github-release-asset.sh github_api_token=$GITHUB_API_TOKEN tag=${params.version} filename=./subscription/target/bonita-user-application-sp-${params.version}.bos"
                 }
             }
         }

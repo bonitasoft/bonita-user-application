@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<applications xmlns="http://documentation.bonitasoft.com/application-xml-schema/1.1">
+    <application token="userApp" version="${application.version}" profile="User" homePage="task-list" state="ACTIVATED" layout="custompage_BonitaLayoutV24" theme="custompage_themeBonita">
+        <displayName>${name}</displayName>
+        <description>${description}</description>
+        <iconPath>bonita-user-application.png</iconPath>
+        <applicationPages>
+            <applicationPage customPage="custompage_UserCaseDetailsBonitaV3" token="case-details"/>
+            <applicationPage customPage="custompage_tasklist" token="task-list"/>
+            <applicationPage customPage="custompage_UserCaseListBonitaV15" token="case-list"/>
+            <applicationPage customPage="custompage_processlistBonita" token="process-list"/>
+        </applicationPages>
+        <applicationMenus>
+            <applicationMenu applicationPage="task-list">
+                <displayName>Tasks</displayName>
+            </applicationMenu>
+            <applicationMenu applicationPage="case-list">
+                <displayName>Cases</displayName>
+            </applicationMenu>
+            <applicationMenu applicationPage="process-list">
+                <displayName>Processes</displayName>
+            </applicationMenu>
+        </applicationMenus>
+    </application>
+</applications>

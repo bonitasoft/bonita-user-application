@@ -62,7 +62,9 @@ jobs:
         if: ${{ inputs.release }}
         env:
           GH_TOKEN: ${{ secrets.BONITA_CI_PAT }}
-        run: gh release upload ${{ inputs.ref }} ./target/bonita-user-application-${{ inputs.ref }}.bos --repo bonitasoft/bonita-user-application
+        run: |
+          gh release upload ${{ inputs.ref }} ./community/target/bonita-user-application-${{ inputs.ref }}.bos --repo bonitasoft/bonita-user-application
+          gh release upload ${{ inputs.ref }} ./subscription/target/bonita-user-application-sp-${{ inputs.ref }}.bos --repo bonitasoft/bonita-user-application
 
       - name: Extract secrets from Keeper
         if: ${{ inputs.release }}
@@ -93,6 +95,30 @@ jobs:
               else
                 echo "BOS Redirect entry ($REDIRECT_ID,$MAJOR_VERSION,$MAINTENANCE_VERSION) updated with URL: $BOS_RELEASE_ASSET_URL"
               fi   
+          else
+              echo "BOS Redirect entry ($REDIRECT_ID,$MAJOR_VERSION,$MAINTENANCE_VERSION) created with URL: $BOS_RELEASE_ASSET_URL"
+          fi
+
+      - name: Update BOS redirect table (subscription)
+        if: ${{ inputs.release }}
+        env:
+          REDIRECT_ID: ${{ vars.BOS_REDIRECT_USER_APP_ID }}
+          BOS_REDIRECT_URL: https://redirect.bonitasoft.com/
+          BOS_RELEASE_ASSET_URL: https%3A%2F%2Fgithub.com%2Fbonitasoft%2Fbonita-user-application%2Freleases%2Fdownload%2F${{ inputs.ref }}%2Fbonita-user-application-sp-${{ inputs.ref }}.bos
+        run: |
+          MAINTENANCE_VERSION="$(cut -d '.' -f3 <<< ${{ inputs.ref }})"
+          MAJOR_VERSION="$(cut -d '.' -f1,2 <<< ${{ inputs.ref }})"
+          STATUS_CODE=$(curl -s -o /dev/null -L -w "%{http_code}\\n" "$BOS_REDIRECT_URL" -u "$BOS_REDIRECT_USER:$BOS_REDIRECT_PSW" -H "Content-Type: application/x-www-form-urlencoded" --data "id=$REDIRECT_ID&product=sp&major_version=$MAJOR_VERSION&minor_version=$MAINTENANCE_VERSION&URL=$BOS_RELEASE_ASSET_URL&description=Bonita+User+SP+App&submit=true")
+          if [ $STATUS_CODE!="200" ]
+          then
+              echo "Redirect entry for tuple ($REDIRECT_ID,$MAJOR_VERSION,$MAINTENANCE_VERSION) already exists. Performing update..."
+              STATUS_CODE=$(curl -s -o /dev/null -L -w "%{http_code}\\n" "$BOS_REDIRECT_URL" -u "$BOS_REDIRECT_USER:$BOS_REDIRECT_PSW" -H "Content-Type: application/x-www-form-urlencoded" --data "action=modify&id=$REDIRECT_ID&product=sp&major_version=$MAJOR_VERSION&minor_version=$MAINTENANCE_VERSION&URL=$BOS_RELEASE_ASSET_URL&description=Bonita+User+SP+App&submit_modify=true")
+              if [ $STATUS_CODE!="200" ]
+              then
+                echo "Failed to update BOS redirect entry ($REDIRECT_ID,$MAJOR_VERSION,$MAINTENANCE_VERSION) with new URL: $BOS_RELEASE_ASSET_URL"
+              else
+                echo "BOS Redirect entry ($REDIRECT_ID,$MAJOR_VERSION,$MAINTENANCE_VERSION) updated with URL: $BOS_RELEASE_ASSET_URL"
+              fi
           else
               echo "BOS Redirect entry ($REDIRECT_ID,$MAJOR_VERSION,$MAINTENANCE_VERSION) created with URL: $BOS_RELEASE_ASSET_URL"
           fi

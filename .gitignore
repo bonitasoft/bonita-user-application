@@ -1,4 +1,5 @@
 /target/
+/**/target/
 /web_page/
 /web_widgets/
 .idea/

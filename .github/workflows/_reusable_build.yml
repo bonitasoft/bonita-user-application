@@ -56,7 +56,8 @@ jobs:
       - name: Maven Build & Deploy release
         if: ${{ inputs.release }}
         timeout-minutes: 60
-        run: ./mvnw -ntp deploy -DaltDeploymentRepository=staging::${{ vars.STAGING_REPOSITORY_URL }}
+        # Profile release is used to sign artifacts with GPG
+        run: ./mvnw -ntp deploy -Prelease -DaltDeploymentRepository=staging::${{ vars.STAGING_REPOSITORY_URL }}
 
       - name: Upload BOS to the Github release
         if: ${{ inputs.release }}
@@ -75,7 +76,7 @@ jobs:
             ${{ vars.KEEPER_BOS_REDIRECT_RECORD_ID }}/field/login > env:BOS_REDIRECT_USER
             ${{ vars.KEEPER_BOS_REDIRECT_RECORD_ID }}/field/password > env:BOS_REDIRECT_PSW
 
-      - name: Update BOS redirect table
+      - name: Update BOS redirect table (community)
         if: ${{ inputs.release }}
         env:
           REDIRECT_ID: ${{ vars.BOS_REDIRECT_USER_APP_ID }}

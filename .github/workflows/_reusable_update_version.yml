@@ -39,7 +39,7 @@ jobs:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
       - name: Update version
-        run: ./mvnw -B -ntp versions:set -DnewVersion=${{ inputs.version }}
+        run: ./mvnw -B -ntp versions:set -DnewVersion=${{ inputs.version }} -DprocessAllModules=true
 
       - name: Git Setup
         uses: bonitasoft/git-setup-action@v1

@@ -20,14 +20,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: bonitasoft/bonita-user-application
           ref: ${{ github.ref }}
           token: ${{ secrets.BONITA_CI_PAT }}
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: temurin

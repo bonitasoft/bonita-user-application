@@ -16,7 +16,6 @@ updates:
       development-dependencies:
         dependency-type: "development"
 
-<<<<<<< HEAD
   # Maintain dependencies for maven
   - package-ecosystem: "maven" 
     directory: "/" 
@@ -31,5 +30,4 @@ updates:
         dependency-type: "production"
       development-dependencies:
         dependency-type: "development"
-=======
->>>>>>> origin/10.1.x
+

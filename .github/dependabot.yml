@@ -4,9 +4,9 @@ updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
-    target-branch: dev
+    target-branch: "10.0.x"  # OLDEST_SUPPORTED_BRANCH
     schedule:
-      interval: "daily"
+      interval: "weekly"
     commit-message:
       prefix: "chore"
       include: "scope"
@@ -16,6 +16,7 @@ updates:
       development-dependencies:
         dependency-type: "development"
 
+<<<<<<< HEAD
   # Maintain dependencies for maven
   - package-ecosystem: "maven" 
     directory: "/" 
@@ -30,3 +31,5 @@ updates:
         dependency-type: "production"
       development-dependencies:
         dependency-type: "development"
+=======
+>>>>>>> origin/10.1.x

@@ -10,6 +10,9 @@ on:
       - "[0-9]+.[0-9]+.x"
       - "master"
       - "release-*"
+      # Temporary addition to support merge from dev to 12.0.x, will be removed after the release 11.2.0:
+      - "dev"
+      - "!12.0.x"
 
 jobs:
   merge-upstream:

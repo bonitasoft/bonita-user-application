@@ -34,7 +34,7 @@ jobs:
           cache: maven
 
       - name: Setup Maven
-        uses: bonitasoft/maven-settings-action@v1
+        uses: bonitasoft/maven-settings-action@v2
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 

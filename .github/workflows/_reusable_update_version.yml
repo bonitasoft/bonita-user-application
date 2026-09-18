@@ -27,14 +27,14 @@ jobs:
           token: ${{ secrets.BONITA_CI_PAT }}
 
       - name: Setup Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           java-version: 17
           distribution: temurin
           cache: maven
 
       - name: Setup Maven
-        uses: bonitasoft/maven-settings-action@v1
+        uses: bonitasoft/maven-settings-action@v2
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 

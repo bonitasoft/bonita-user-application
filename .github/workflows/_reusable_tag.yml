@@ -28,6 +28,25 @@ jobs:
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
+      # Release notes start from the highest released version strictly below the one being tagged:
+      # 10.2.11 -> 10.2.10, 10.3.0 -> latest 10.2.x, 11.0.0 -> latest 10.x.y.
+      # Pre-release versions (beta/alpha/rc/W) are excluded: no start tag, notes fall back to the tag annotation.
+      - name: Find Previous Tag
+        id: previous_tag
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          previous=$(
+            { git ls-remote --tags origin | sed 's|.*refs/tags/||; s|\^{}$||'; echo "$VERSION"; } \
+              | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+              | sort -uV \
+              | grep -B1 -x "$VERSION" | head -1 \
+              || true
+          )
+          if [ "$previous" = "$VERSION" ]; then previous=''; fi
+          echo "Previous tag: ${previous:-<none>}"
+          echo "tag=$previous" >> "$GITHUB_OUTPUT"
+
       - name: Create Release Branch
         run: git checkout -B release/${{ inputs.version }}
 
@@ -43,4 +62,12 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ secrets.BONITA_CI_PAT }}
-        run: gh release create ${{ inputs.version }} --generate-notes --repo bonitasoft/bonita-user-application
+          VERSION: ${{ inputs.version }}
+          PREVIOUS_TAG: ${{ steps.previous_tag.outputs.tag }}
+        run: |
+          if [ -n "$PREVIOUS_TAG" ]; then
+            gh release create "$VERSION" --generate-notes --notes-start-tag "$PREVIOUS_TAG"
+          else
+            # No comparable previous release (first of a line, or a pre-release): use the tag annotation
+            gh release create "$VERSION" --notes-from-tag
+          fi
